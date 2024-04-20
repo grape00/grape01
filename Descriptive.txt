@@ -1,0 +1,35 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df= pd.read_csv('exp1_bmi.csv')
+
+print(df.describe())
+ndf = df.select_dtypes(include='number')
+
+me = ndf.mean()
+med = ndf.median()
+std = ndf.std()
+var= ndf.var()
+mod = ndf.mode().iloc[0]
+range = ndf.max() - ndf.min()
+IQR = ndf.quantile(0.75)-ndf.quantile(0.25)
+skew = ndf.skew()
+kurt = ndf.kurt()
+
+start = pd.DataFrame({
+    'Mean': me,
+    'Median': med,
+    'Mode':mod,
+    'Variance':var,
+    'Std. Dev.': std,
+    'Range': range,
+    'IQR':IQR,
+    'Skewness':skew,
+    'Kurosis':kurt
+})
+
+plt.figure(figsize=(8,8))
+sns.boxplot(x='Gender',y='Weight',data=df)
+plt.title('Boxplot of Gender vs Height')
+plt.show()

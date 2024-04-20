@@ -1,0 +1,16 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('e.csv')
+print('Original Dataset')
+print(df)
+
+from sklearn.impute import SimpleImputer
+imputerage= SimpleImputer(missing_values=np.NaN, strategy='median')
+imputersalary = SimpleImputer(missing_values=np.NaN, strategy='mean')
+
+df['Age']= imputerage.fit_transform(df['Age'].values.reshape(-1,1))
+df['Salary']=imputersalary.fit_transform(df['Salary'].values.reshape(-1,1))
+
+print('Corrected Dataset')
+print(df)

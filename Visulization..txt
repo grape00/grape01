@@ -1,0 +1,71 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+df = pd.read_csv('tips.csv')
+print(df.describe())
+print(df.head())
+bill = df.total_bill
+print('Maximum bill: ',np.max(bill))
+print('Minimum bill: ',np.min(bill))
+print('Satndard deviation: ',np.std(bill))
+print('Mean :',np.mean(bill))
+print('Median: ',np.median(bill))
+
+tip=df.tip
+print('Maximum tip: ',np.max(tip))
+print('Minimum tip: ',np.min(tip))
+print('Satndard deviation: ',np.std(tip))
+print('Mean :',np.mean(tip))
+print('Median: ',np.median(tip))
+
+print(df.smoker.value_counts())
+print(df.day.value_counts())
+print(df.time.value_counts())
+print(df.sex.value_counts())
+
+plt.figure(figsize=(8,8))
+plt.title('Count plot of Smoker , gender based')
+sns.countplot(x='sex',data=df,hue='smoker',palette='viridis')
+plt.show()
+
+plt.figure(figsize=(8,8))
+plt.title('Tips per day of week')
+sns.countplot(x='day',data=df,color='orange')
+plt.show()
+
+plt.figure(figsize=(8,8))
+plt.title('Gender based Days')
+sns.countplot(x='day',data=df,hue='sex',palette='viridis')
+plt.show()
+
+sns.histplot(df['tip'])
+plt.show()
+
+sns.boxplot(data=df)
+plt.show()
+
+sns.relplot(x='sex',y='tip',data=df,col='time')
+plt.show()
+
+sns.scatterplot(x='sex',y='tip',data=df)
+plt.show()
+
+sns.lmplot(x='total_bill',y='tip',data=df,col='time')
+plt.show()
+
+sns.catplot(x='sex',y='tip',data=df,col='time',kind='bar')
+plt.show()
+
+sns.catplot(x='sex',y='tip',data=df,col='time',kind='swarm')
+plt.show()
+
+sns.catplot(x='sex',y='tip',data=df,col='time',kind='violin')
+plt.show()
+
+sns.pairplot(df,hue='total_bill')
+plt.show()
+
+.
