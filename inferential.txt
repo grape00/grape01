@@ -1,0 +1,22 @@
+#One sample test
+import pandas as pd
+import  numpy as np
+from scipy.stats import ttest_1samp, ttest_ind
+
+df = pd.read_csv('Reliance.csv')
+data1 = df['Rice_Bag_Weight']
+mean1b= 24
+t_stat1, p_value1 = ttest_1samp(data1,mean1b)
+print('One sample T-Test')
+print('T-statistic for One Sample Test: ',t_stat1)
+print('P-value for One Sample Test: ', p_value1)
+#Two Sample Test
+cf = pd.read_csv('score.csv')
+group1 = cf['Pre_Score']
+group2 = cf['Post_Score']
+t_stat2, p_value2 = ttest_ind(group1,group2)
+print('Two Sample Test')
+print('T- statistic for Two Sample Test:',t_stat2)
+print('P_value for Two Sample Test: ',p_value2)
+
+
